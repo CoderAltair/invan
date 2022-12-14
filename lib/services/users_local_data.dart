@@ -29,7 +29,7 @@ class UserLocalData {
   }
 
   //load pagination number
-  int loadPaginationNumber() {
+  int? loadPaginationNumber() {
     var number = box.get(paginationKey);
 
     return number;
