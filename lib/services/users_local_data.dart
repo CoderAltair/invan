@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:hive/hive.dart';
+import '../models/posts_model.dart';
 import '../models/users_model.dart';
 
 class UserLocalData {
@@ -33,5 +36,19 @@ class UserLocalData {
     var number = box.get(paginationKey);
 
     return number;
+  }
+
+  //store post data
+  void storePosts(String post) async {
+    box.put(userKey, post);
+  }
+
+//load post data
+  List<Posts> loadPosts() {
+    var posts = Posts.fromJsonToList(
+      jsonDecode(box.get(userKey)),
+    );
+
+    return posts;
   }
 }
