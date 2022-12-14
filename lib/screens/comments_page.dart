@@ -41,18 +41,34 @@ class _CommentsPageState extends State<CommentsPage> {
                           return Padding(
                             padding: index == 0
                                 ? const EdgeInsets.only(bottom: 130)
-                                : const EdgeInsets.all(8),
+                                : const EdgeInsets.all(10),
                             child: Card(
                               child: ListTile(
                                 leading: Text(
                                     state.getComments[index].id.toString()),
                                 title: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(state.getComments[index].name),
-                                    Text(state.getComments[index].email),
+                                    Text(
+                                      'email:${state.getComments[index].email}',
+                                      style:
+                                          Theme.of(context).textTheme.headline6,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(vertical: 5),
+                                      child: Text(
+                                        state.getComments[index].name,
+                                        style:
+                                            Theme.of(context).textTheme.headline6,
+                                      ),
+                                    ),
                                   ],
                                 ),
-                                subtitle: Text(state.getComments[index].body),
+                                subtitle: Text(
+                                  state.getComments[index].body,
+                                  maxLines: 2,
+                                  style: Theme.of(context).textTheme.subtitle1,
+                                ),
                               ),
                             ),
                           );
@@ -68,7 +84,7 @@ class _CommentsPageState extends State<CommentsPage> {
                             children: [
                               InkWell(
                                 borderRadius: BorderRadius.circular(50),
-                                onTap: () async{
+                                onTap: () async {
                                   a = a - 1;
                                   if (a <= 0) {
                                     a = 1;

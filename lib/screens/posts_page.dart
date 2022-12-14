@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:invan_aplication/screens/comments_page.dart';
-
 import '../bloc/get posts/get_posts_bloc.dart';
 import '../bloc/get_comments/get_comments_bloc.dart';
 import '../services/users_local_data.dart';
@@ -42,10 +41,25 @@ class _PostsPageState extends State<PostsPage> {
                             padding: const EdgeInsets.all(8.0),
                             child: Card(
                               child: ListTile(
-                                leading:
-                                    Text(state.getPosts[index].id.toString()),
-                                title: Text(state.getPosts[index].body),
-                                subtitle: Text(state.getPosts[index].title),
+                                leading: Text(
+                                  state.getPosts[index].id.toString(),
+                                ),
+                                title: Text(
+                                  state.getPosts[index].title,
+                                  maxLines: 2,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline6!
+                                      .copyWith(fontWeight: FontWeight.w500),
+                                ),
+                                subtitle: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  child: Text(
+                                    state.getPosts[index].body,
+                                    maxLines: 2,
+                                  ),
+                                ),
                               ),
                             ),
                           );
@@ -58,7 +72,7 @@ class _PostsPageState extends State<PostsPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: ElevatedButton(
                             onPressed: () async {
-                              UserLocalData().loadPaginationNumber()==null
+                              UserLocalData().loadPaginationNumber() == null
                                   ? paginationNumber = 1
                                   : paginationNumber =
                                       UserLocalData().loadPaginationNumber()!;
