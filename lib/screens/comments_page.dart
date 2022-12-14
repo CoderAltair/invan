@@ -68,10 +68,13 @@ class _CommentsPageState extends State<CommentsPage> {
                             children: [
                               InkWell(
                                 borderRadius: BorderRadius.circular(50),
-                                onTap: () {
+                                onTap: () async{
+                                  a = a - 1;
                                   if (a <= 0) {
                                     a = 1;
+                                    print(a);
                                   }
+                                  print(a);
                                   BlocProvider.of<GetCommentsBloc>(context).add(
                                     CommentsSuccesEvent(paginationCount: a),
                                   );
