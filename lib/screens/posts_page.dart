@@ -58,15 +58,13 @@ class _PostsPageState extends State<PostsPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: ElevatedButton(
                             onPressed: () async {
-                              UserLocalData().storePaginationNumber(1);
-                              paginationNumber =
-                                  UserLocalData().loadPaginationNumber();
+                              UserLocalData().loadPaginationNumber()==null
+                                  ? paginationNumber = 1
+                                  : paginationNumber =
+                                      UserLocalData().loadPaginationNumber()!;
                               BlocProvider.of<GetCommentsBloc>(context).add(
                                 CommentsSuccesEvent(
-                                    // ignore: prefer_if_null_operators
-                                    paginationCount: paginationNumber == null
-                                        ? 1
-                                        : paginationNumber),
+                                    paginationCount: paginationNumber),
                               );
                               Navigator.pushReplacementNamed(
                                   context, CommentsPage.id);
